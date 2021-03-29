@@ -5,7 +5,7 @@ authors = ["Leonardo Razovic <leorazzo@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-glass_pumpkin = { git = "https://github.com/lrazovic/glass_pumpkin" }
+glass_pumpkin = "0.5"
 num-bigint = { version = "0.4.0", features = ["rand"] }
 num-iter = "0.1.42"
 num = "0.4.0"
@@ -14,3 +14,5 @@ openssl = "0.10.33"
 
 [profile.release]
 lto = true
+codegen-units = 1
+
