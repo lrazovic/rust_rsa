@@ -8,10 +8,10 @@ pub struct Keys {
 }
 
 impl Keys {
-    pub fn new(public: PublicKey, private: PrivateKey) -> Self {
+    pub fn new(public_key: PublicKey, private_key: PrivateKey) -> Self {
         Self {
-            public_key: public,
-            private_key: private,
+            public_key,
+            private_key,
         }
     }
 }

@@ -1,4 +1,5 @@
 mod keys;
+
 use glass_pumpkin::prime;
 use keys::{Keys, PrivateKey, PublicKey};
 use num::bigint::{BigInt, BigUint, ToBigInt};
@@ -9,9 +10,10 @@ use std::mem::swap;
 
 // From https://rosettacode.org/wiki/Modular_inverse#Rust
 fn mod_inverse(a: &BigUint, module: &BigUint) -> Option<BigUint> {
+    let (zero, one): (BigInt, BigInt) = (Zero::zero(), One::one());
     let (mut x, mut y): (BigInt, BigInt) = (Zero::zero(), One::one());
     let (mut m, mut n) = (module.to_bigint().unwrap(), a.to_bigint().unwrap());
-    while n != Zero::zero() {
+    while !n.is_zero() {
         let quotient = &m / &n;
         let mut temp: BigInt = &x - &quotient * &y;
         swap(&mut x, &mut y);
@@ -20,13 +22,13 @@ fn mod_inverse(a: &BigUint, module: &BigUint) -> Option<BigUint> {
         swap(&mut m, &mut n);
         swap(&mut n, &mut temp);
     }
-    if m > One::one() {
+    if m > one {
         return None;
     };
-    if x < Zero::zero() {
+    if x < zero {
         x = &x + &module.to_bigint().unwrap()
     };
-    Some(x.to_biguint().unwrap())
+    x.to_biguint()
 }
 
 fn generate_primes(bits: usize) -> (BigUint, BigUint, BigUint) {
@@ -207,7 +209,7 @@ fn check_time_rsa_versus_real_world() {
     let encrypted = keys.public_key.encrypt(mess);
     let decrypted = keys.private_key.decrypt(encrypted);
     let dec_mess = decrypted.to_bytes_be();
-    println!("MY RSA enc + dec {}us", now.elapsed().as_micros());
+    println!("My RSA enc + dec {}us", now.elapsed().as_micros());
     assert_eq!(
         String::from_utf8(dec_buf.to_vec())
             .unwrap()
@@ -252,7 +254,7 @@ fn check_time_rsa_given_e_versus_real_world() {
     let encrypted = keys.public_key.encrypt(mess);
     let decrypted = keys.private_key.decrypt(encrypted);
     let dec_mess = decrypted.to_bytes_be();
-    println!("MY RSA enc + dec {}us", now.elapsed().as_micros());
+    println!("My RSA enc + dec {}us", now.elapsed().as_micros());
     assert_eq!(
         String::from_utf8(dec_buf.to_vec())
             .unwrap()
