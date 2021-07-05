@@ -5,12 +5,12 @@ authors = ["Leonardo Razovic <leorazzo@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-glass_pumpkin = "0.5"
+glass_pumpkin = "1.0.0"
 num-bigint = { version = "0.4.0", features = ["rand"] }
 num-iter = "0.1.42"
 num = "0.4.0"
 rand = "0.8.3"
-openssl = "0.10.33"
+openssl = "0.10.34"
 
 [profile.release]
 lto = true

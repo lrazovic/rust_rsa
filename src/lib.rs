@@ -1,3 +1,4 @@
+#![allow(clippy::many_single_char_names)]
 mod keys;
 
 use glass_pumpkin::prime;

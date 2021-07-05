@@ -58,9 +58,9 @@ impl PublicKey {
 }
 impl fmt::Display for PublicKey {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "e = {}\n", self.e)?;
-        write!(f, "n = {}\n", self.n)?;
-        write!(f, "key_size={}\n", self.key_size)
+        writeln!(f, "e = {}", self.e)?;
+        writeln!(f, "n = {}", self.n)?;
+        writeln!(f, "key_size={}", self.key_size)
     }
 }
 
@@ -82,7 +82,7 @@ impl PrivateKey {
 
 impl fmt::Display for PrivateKey {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "d = {}\n", self.d)?;
-        write!(f, "n = {}\n", self.n.to_string())
+        writeln!(f, "d = {}", self.d)?;
+        writeln!(f, "n = {}", self.n.to_string())
     }
 }
